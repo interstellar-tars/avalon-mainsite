@@ -49,7 +49,7 @@
       status.textContent = 'Updating...';
 
       try {
-        const response = await fetch('/api/banner/', {
+        const response = await fetch('/api/banner', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
