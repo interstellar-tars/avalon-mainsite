@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Sitewide Banner</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    h1 { color: #333; }
+    label { display: block; margin-top: 10px; }
+    input, button { margin-top: 5px; padding: 8px; width: 100%; }
+    button { background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+  </style>
+</head>
+<body>
+  <h1>Admin Panel - Update Sitewide Banner</h1>
+  <form id="bannerForm">
+    <label for="text">Banner Text:</label>
+    <input type="text" id="text" placeholder="Enter banner text" required>
+
+    <label for="color">Background Color:</label>
+    <input type="color" id="color" value="#333333">
+
+    <label for="visible">Show Banner:</label>
+    <select id="visible">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+
+    <label for="password">Admin Password:</label>
+    <input type="password" id="password" placeholder="Enter admin password" required>
+
+    <button type="submit">Update Banner</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    document.getElementById('bannerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const text = document.getElementById('text').value;
+      const color = document.getElementById('color').value;
+      const visible = document.getElementById('visible').value === 'true';
+      const password = document.getElementById('password').value;
+
+      const status = document.getElementById('status');
+      status.textContent = 'Updating...';
+
+      try {
+        const response = await fetch('/api/banner', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${password}`
+          },
+          body: JSON.stringify({ text, color, visible })
+        });
+
+        if (response.ok) {
+          status.textContent = 'Banner updated successfully!';
+        } else {
+          status.textContent = 'Failed to update banner. Check your password.';
+        }
+      } catch (error) {
+        console.error('Error updating banner:', error);
+        status.textContent = 'An error occurred. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>
