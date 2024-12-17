@@ -30,7 +30,7 @@
     // Fetch the banner content from the Cloudflare Worker API
     async function loadBanner() {
       try {
-        const response = await fetch('https://avalon-bannerworker.cubiodojo.workers.dev/api/banner');
+        const response = await fetch('https://corsproxy.io/?url=https://avalon-bannerworker.cubiodojo.workers.dev/api/banner');
         const banner = await response.json();
 
         const bannerDiv = document.getElementById('banner');
