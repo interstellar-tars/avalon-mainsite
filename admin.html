@@ -49,7 +49,7 @@
       status.textContent = 'Updating...';
 
       try {
-        const response = await fetch('https://corsproxy.io/?url=https://avalon-bannerworker.cubiodojo.workers.dev/', {
+        const response = await fetch('/api/banner/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
