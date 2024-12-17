@@ -49,7 +49,8 @@
       status.textContent = 'Updating...';
 
       try {
-        const response = await fetch('/api/banner', {
+        const response = await fetch('https://avalon-bannerworker.cubiodojo.workers.dev/api/banner', {
+
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
